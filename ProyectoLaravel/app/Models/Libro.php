@@ -21,6 +21,7 @@ class Libro extends Model
         'descripcion',
         'autor',
         'anio'
+
     ];
 
     public function libroFavoritos(){

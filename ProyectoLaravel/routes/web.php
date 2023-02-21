@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
+Route::get('/',[LibrosController::class, 'get10'], function () {
     return view('dashboard');
 })->name('inicio');
 
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('libros', LibrosController::class)->middleware(isAdmin::class)->except('index');
-Route::get('/libros', function () { return view('libros/index');})->name('libros.index');
+Route::get('/libros', [LibrosController::class, 'index'],function () { return view('libros/index');})->name('libros.index');
 
 
 

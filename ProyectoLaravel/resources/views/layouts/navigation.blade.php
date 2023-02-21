@@ -14,6 +14,20 @@
                         {{ __('Libros') }}
                     </x-nav-link>
                 </div>
+
+                @if(Auth::user() && Auth::user()->rol=='admin')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('libros.create')" :active="request()->routeIs('libros.create')">
+                        {{ __('Añadir libro') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('libros.index')" :active="request()->routeIs('libros.index')">
+                        {{ __('Libros') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
 
