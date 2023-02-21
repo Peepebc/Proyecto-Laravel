@@ -15,9 +15,11 @@
                         </h2>
                         <a class="font-semibold text-xl text-blue-600 leading-tight text-center py-5" href="{{route('libros.index')}}">ver mas</a>
                     </div>
-                    @foreach ($libros as $libro)
-                    <a href="{{route('libros.show',['libro'=>$libro->id])}}"><img class="w-56" src="{{asset($url.$libro->imagen)}}" alt=""></a>
-                    @endforeach
+                    <div class="grid grid-cols-5 gap-4">
+                        @foreach ($libros as $libro)
+                        <a href="{{route('libros.show',['libro'=>$libro->id])}}"><img class="w-56" src="{{asset($url.$libro->imagen)}}" alt=""></a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

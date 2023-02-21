@@ -23,11 +23,8 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"
                 required autocomplete="email" />
-            @error('email')
-            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <span class="font-medium">Introduce un correo valido</span>
-              </div>
-            @enderror
+
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Fecha Nacimiento -->
