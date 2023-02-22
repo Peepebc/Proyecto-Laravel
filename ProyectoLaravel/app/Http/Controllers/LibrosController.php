@@ -60,6 +60,57 @@ class LibrosController extends Controller
     }
 
      /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
+        $libro = Libro::findOrFail($id);
+        $url = 'storage/libros/';
+        return view('libros.edit')->with('libro',$libro)->with('url',$url);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(Request $request,$id)
+    {
+        $request->validate([
+            'titulo'=>'required',
+            'autor'=>'required',
+            'anio'=>'required',
+            'descripcion'=>'required',
+            'imagen'=>'required|image'
+        ]);
+        try{
+
+            $libro = Libro::findOrFail($id);
+            $libro->titulo= $request->titulo;
+            $libro->autor= $request->autor;
+            $libro->anio= $request->anio;
+            if(is_uploaded_file($request->imagen)){
+                $nombrefoto = time() . "-" . $request->file('imagen')->getClientOriginalName();
+                $libro->imagen = $nombrefoto;
+                $request->file('imagen')->storeAs('public/libros', $nombrefoto);
+            }
+            $libro->save();
+            $request->file('imagen')->storeAs('public/libros', $nombrefoto);
+            return redirect()->route('libros.index')->with('status', "Libro editado Correctamente");
+        }
+        catch(QueryException $exception){
+            return redirect()->route('inicio')->with('status', $exception);
+        }
+    }
+
+     /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -70,5 +121,18 @@ class LibrosController extends Controller
         $libro = Libro::findOrFail($id);
         $url = 'storage/libros/';
         return view('libros.show')->with('libro',$libro)->with('url',$url);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $libro = Libro::findOrFail($id);
+        $libro->delete();
+        return redirect()->route('libros.index')->with('status', "Libro borrado correctamente");
     }
 }
