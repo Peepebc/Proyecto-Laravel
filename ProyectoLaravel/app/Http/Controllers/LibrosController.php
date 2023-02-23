@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -18,6 +19,7 @@ class LibrosController extends Controller
         $libros = Libro::all();
         $url = 'storage/libros/';
         return view('libros.index')->with('libros', $libros)->with('url',$url);
+
     }
 
     public function get10()
@@ -119,8 +121,9 @@ class LibrosController extends Controller
     public function show($id)
     {
         $libro = Libro::findOrFail($id);
+        $comentarios = Comentario::select('users.nombre','comentarios.comentario')->where('idLibro',$id)->join('users', 'comentarios.idUsuario', '=', 'users.id')->get();
         $url = 'storage/libros/';
-        return view('libros.show')->with('libro',$libro)->with('url',$url);
+        return view('libros.show')->with('libro',$libro)->with('comentarios',$comentarios)->with('url',$url);
     }
 
     /**

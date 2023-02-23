@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function usuarioFavoritos(){
         return $this->hasMany(Favorito::class);
     }
+
+    public function librocomentarios(){
+        return $this->hasMany(Comentario::class);
+    }
 }

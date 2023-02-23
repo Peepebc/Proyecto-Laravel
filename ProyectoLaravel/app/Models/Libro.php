@@ -27,4 +27,8 @@ class Libro extends Model
     public function libroFavoritos(){
         return $this->hasMany(Favorito::class);
     }
+
+    public function librocomentarios(){
+        return $this->hasMany(Comentario::class);
+    }
 }

@@ -17,7 +17,7 @@
                     </div>
                     <div class="grid grid-cols-5 gap-4">
                         @foreach ($libros as $libro)
-                        <a href="{{route('libros.show',['libro'=>$libro->id])}}"><img class="w-56" src="{{asset($url.$libro->imagen)}}" alt=""></a>
+                        <a href="{{route('libros.show',['libro'=>$libro->id])}}"><img class="w-56 h-80" src="{{asset($url.$libro->imagen)}}" alt=""></a>
                         @endforeach
                     </div>
                 </div>

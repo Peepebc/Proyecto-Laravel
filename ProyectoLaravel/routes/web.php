@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\ComentariosController;
+use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\isAdmin;
@@ -30,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('libros', LibrosController::class)->middleware(isAdmin::class)->except('index','show');
 Route::get('/libros', [LibrosController::class, 'index'],function () { return view('libros/index');})->name('libros.index');
+Route::resource('comentarios', ComentariosController::class)->middleware(isAdmin::class)->except('index');
+Route::get('/misFavoritos', [FavoritosController::class, 'index'],function () { return view('favoritos/index');})->middleware('auth')->name('favoritos.index');
 Route::get('/libros/{libro}', [LibrosController::class, 'show'],function () { return view('libros/{libro}');})->name('libros.show');
 
 

@@ -14,6 +14,11 @@
                         {{ __('Libros') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('favoritos.index')" :active="request()->routeIs('favoritos.index')">
+                        {{ __('Mis Favoritos') }}
+                    </x-nav-link>
+                </div>
 
                 @if(Auth::user() && Auth::user()->rol=='admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

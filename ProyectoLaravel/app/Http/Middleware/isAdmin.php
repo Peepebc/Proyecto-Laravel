@@ -18,7 +18,7 @@ class isAdmin
     {
         if (Auth::user() &&  Auth::user()->rol == "admin") {
             return $next($request);
-     }
+        }
 
     return redirect('/');
     }

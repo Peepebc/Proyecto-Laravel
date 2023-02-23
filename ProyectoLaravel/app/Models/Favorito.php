@@ -18,7 +18,7 @@ class Favorito extends Model
      */
     protected $fillable = [
         'usuario',
-        'instrumento'
+        'libro'
     ];
 
     public function usuario(){
