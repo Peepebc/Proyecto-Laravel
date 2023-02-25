@@ -37,12 +37,21 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'fechaNacimiento' => ['required', 'date', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
+            'pfp' => ['image'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        if($request->file('pfp')){
+            $nombrefoto = time() . "-" . $request->file('pfp')->getClientOriginalName();
+            $request->file('pfp')->storeAs('public/users_pfp', $nombrefoto);
+        }
+        else{
+            $nombrefoto='default.jpg';
+        }
 
         $user = User::create([
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos,
+            'pfp' => $nombrefoto,
             'email' => $request->email,
             'fechaNacimiento' => $request->fechaNacimiento,
             'direccion' => $request->direccion,

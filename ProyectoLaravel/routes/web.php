@@ -37,5 +37,7 @@ Route::get('/misFavoritos', [FavoritosController::class, 'index'],function () { 
 Route::get('/libros/{libro}', [LibrosController::class, 'show'],function () { return view('libros/{libro}');})->name('libros.show');
 
 
+Route::get('download-pdf',[LibrosController::class,'downloadPDF'])->name('download');
+
 
 require __DIR__.'/auth.php';

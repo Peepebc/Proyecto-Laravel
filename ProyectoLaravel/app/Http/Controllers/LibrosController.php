@@ -6,6 +6,7 @@ use App\Models\Comentario;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class LibrosController extends Controller
 {
@@ -124,6 +125,20 @@ class LibrosController extends Controller
         $comentarios = Comentario::select('users.nombre','comentarios.comentario')->where('idLibro',$id)->join('users', 'comentarios.idUsuario', '=', 'users.id')->get();
         $url = 'storage/libros/';
         return view('libros.show')->with('libro',$libro)->with('comentarios',$comentarios)->with('url',$url);
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadPDF()
+    {
+        $libro = Libro::all();
+        view()->share('libros.pdf',$libro);
+        $pdf = PDF::loadView('libros.pdf',['libros'=>$libro]);
+        return $pdf->download('Listado-Libros.pdf');
     }
 
     /**
