@@ -32,9 +32,9 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('libros', LibrosController::class)->middleware(isAdmin::class)->except('index','show');
 Route::get('/libros', [LibrosController::class, 'index'],function () { return view('libros/index');})->name('libros.index');
-Route::resource('comentarios', ComentariosController::class)->middleware(isAdmin::class)->except('index');
-Route::get('/misFavoritos', [FavoritosController::class, 'index'],function () { return view('favoritos/index');})->middleware('auth')->name('favoritos.index');
-Route::get('/libros/{libro}', [LibrosController::class, 'show'],function () { return view('libros/{libro}');})->name('libros.show');
+Route::resource('comentarios', ComentariosController::class)->except('index');
+Route::get('/misFavoritos', [FavoritosController::class, 'index'],function () { return view('favoritos/index');})->middleware('auth','verified')->name('favoritos.index');
+Route::get('/libros/{libro}', [LibrosController::class, 'show'],function () { return view('libros/{libro}');})->name('libros.show')->middleware('auth','verified');
 
 
 Route::get('download-pdf',[LibrosController::class,'downloadPDF'])->name('download');

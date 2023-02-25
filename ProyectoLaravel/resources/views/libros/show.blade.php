@@ -32,10 +32,15 @@
                     @if (count($comentarios) > 0)
                                 <div class="w-10/12 divide-y" >
                                     @foreach ($comentarios as $comentario)
-                                    <div class="flex w-full p-5" >
-                                        <div class="flex flex-col justify-center">
-                                            <h1 class="font-extrabold">{{$comentario->nombre}}</h1>
-                                            <h1 class="font-thin">{{$comentario->comentario}}</h1>
+                                    <div class="flex w-full p-5 " >
+                                        <div class="flex flex-row justify-center gap-5">
+                                            <div >
+                                                <img class="rounded-full w-16 h-16 object-cover" src={{asset('storage/users_pfp/'.Auth::user()->pfp)}} alt="">
+                                            </div>
+                                            <div >
+                                                <h1 class="font-extrabold">{{$comentario->nombre}}</h1>
+                                                <h1 class="font-thin">{{$comentario->comentario}}</h1>
+                                            </div>
                                     </div>
                                   </div>
                                     @endforeach
