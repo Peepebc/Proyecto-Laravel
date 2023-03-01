@@ -18,7 +18,7 @@ class APILibroController extends Controller
         $libros = Libro::all();
         return response()->json([
             'status'=>true,
-            'cars'=>$libros
+            'libros'=>$libros
         ]);
 
     }
